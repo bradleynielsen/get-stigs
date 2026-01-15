@@ -34,9 +34,7 @@ foreach ($row in $csv){
     $versionNumber = $null
     $releaseNumber = $null
 
-
     # Extract version/release and strip them from $name
-
     # 1) Version + Release (comma optional, long/short words accepted)
     if ($name -match '(?i)\bver(?:sion)?\s*(\d+)\s*[,;]?\s*(?:rel(?:ease)?)\s*(\d+)\b') {
         $versionNumber = $matches[1]
@@ -57,8 +55,6 @@ foreach ($row in $csv){
     # tidy leftover spaces/punctuation
     $name = ($name -replace '\s{2,}',' ').Trim(' -–—,:;')
 
-
-
       $items += [pscustomobject]@{
         'Name'    = $name
         'Version' = $versionNumber
@@ -70,7 +66,3 @@ foreach ($row in $csv){
 
 # Save CSV next to the script
 $items | Export-Csv -NoTypeInformation -Encoding UTF8 -Path $parsed_STIGsPath
-
-#"HTML: $renderedPath"
-#"CSV : $csv"
-"Rows: $($items.Count)"
