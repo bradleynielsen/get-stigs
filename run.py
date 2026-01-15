@@ -153,7 +153,7 @@ def main():
         w = csv.writer(f)
         w.writerow(["Name", "Download Type", "Upload Date", "Link"])
         w.writerows(rows_out)
-        print(f"Rows written: {len(rows_out)}")
+        # print(f"Rows written: {len(rows_out)}")
 
 if __name__ == "__main__":
     main()
