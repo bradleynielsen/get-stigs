@@ -14,24 +14,19 @@ if (-not (Test-Path (Join-Path $Root "vendor\site-packages\playwright") -PathTyp
     & (Join-Path $Root "init.ps1")
 }
 
-#remove old files
+# Remove old files
 rm -path $stigs_downloadsPath -ErrorAction SilentlyContinue
 rm -path $parsed_STIGsPath    -ErrorAction SilentlyContinue
 
-#run the python downloader
-write-host "Downloading DISA STIG information..."
+# Run the python downloader
+write-host "Downloading DISA STIG information..." -NoNewline
 & $py (Join-Path $Root "run.py")
 write-host -NoNewline -ForegroundColor Green "Done"
-
-
 $csv   = Import-Csv $stigs_downloadsPath
 $count = " (Total: "+$csv.Count+")"
+write-host $count
 
-write-host -NoNewline $count
-
-
-
-
+# Loop over and parse the names into [name | V# | R# |...]
 foreach ($row in $csv){
     $name          = $row.name
     $date          = $row.'Upload Date'
@@ -40,7 +35,7 @@ foreach ($row in $csv){
     $releaseNumber = $null
 
 
-    # extract version/release and strip them from $name
+    # Extract version/release and strip them from $name
 
     # 1) Version + Release (comma optional, long/short words accepted)
     if ($name -match '(?i)\bver(?:sion)?\s*(\d+)\s*[,;]?\s*(?:rel(?:ease)?)\s*(\d+)\b') {
@@ -73,19 +68,9 @@ foreach ($row in $csv){
       }
 }
 
-
-
-# --- 4) Save CSV next to the script
+# Save CSV next to the script
 $items | Export-Csv -NoTypeInformation -Encoding UTF8 -Path $parsed_STIGsPath
 
 #"HTML: $renderedPath"
 #"CSV : $csv"
 "Rows: $($items.Count)"
-
-
-
-
-
-
-
-
