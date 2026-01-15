@@ -1,0 +1,5 @@
+# runtime/binaries - do not commit
+vendor/ms-playwright/
+vendor/site-packages/playwright/
+python-*-embed-amd64/
+stigs_downloads.csv
