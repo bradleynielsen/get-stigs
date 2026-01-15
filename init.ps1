@@ -1,6 +1,6 @@
 # setup.ps1
 # Bootstraps this repo for offline-ish use (no pip/venv needed):
-# - Downloads 4 files to %TEMP%
+# - Downloads 4 files to ./temp
 # - Extracts Python Embedded
 # - Extracts 3 wheels into .\vendor\site-packages
 # - Ensures python314._pth includes vendor\site-packages + import site
@@ -54,7 +54,7 @@ $GreenletWhlUrl   = Get-PypiWheelUrl -Package "greenlet"   -Version $GreenletVer
 
 
 # ---- Paths ----
-$Tmp = Join-Path $env:TEMP "get-stigs-bootstrap"
+$Tmp = Join-Path $Root "temp"
 $VendorDir = Join-Path $Root "vendor"
 $SitePackages = Join-Path $VendorDir "site-packages"
 $BrowserDir = Join-Path $VendorDir "ms-playwright"
@@ -180,5 +180,6 @@ Write-Host "Site-packages: $SitePackages"
 Write-Host "Playwright browsers: $BrowserDir"
 Write-Host "DONE"
 
+#rm -Path $Root\temp -Recurse -Force
 
-rm -Path $Tmp -Recurse -Force
+
