@@ -1,6 +1,9 @@
 # get-stigs
 get stig info from cyber.mil
 
+Run the init file first
+then run.ps1
+
 
 # get-stigs
 
