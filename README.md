@@ -2,6 +2,7 @@
 get stig info from cyber.mil
 
 
+# get-stigs
 
 
 you will need the following :
@@ -24,10 +25,11 @@ Minimum required packages:
         https://pypi.org/project/greenlet/#files
         greenlet-3.3.0-cp314-cp314-win_amd64.whl
 
+    unzip files to:
+    vendor\ms-playwright\
 
 
-
-
+    unzip to root:
     Python 3.14 Embedded (Windows x64)
     https://www.python.org/ftp/python/3.14.2/python-3.14.2-embed-amd64.zip
 

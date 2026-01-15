@@ -135,6 +135,7 @@ def main():
                 if name and rec not in seen:
                     seen.add(rec)
                     rows_out.append(rec)
+                    
 
             # next page
             if not click_next(page):
@@ -152,7 +153,9 @@ def main():
         w = csv.writer(f)
         w.writerow(["Name", "Download Type", "Upload Date", "Link"])
         w.writerows(rows_out)
+        print(f"Rows written: {len(rows_out)}")
 
 if __name__ == "__main__":
     main()
-print(f"Rows written: {len(rows_out)}")
+
+
