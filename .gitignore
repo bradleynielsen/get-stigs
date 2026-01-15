@@ -4,3 +4,4 @@ vendor/site-packages/playwright/
 python-*-embed-amd64/
 stigs_downloads.csv
 /vendor
+/temp

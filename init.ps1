@@ -54,13 +54,16 @@ $GreenletWhlUrl   = Get-PypiWheelUrl -Package "greenlet"   -Version $GreenletVer
 
 
 # ---- Paths ----
-$Tmp = Join-Path $Root "temp"
-$VendorDir = Join-Path $Root "vendor"
+$Tmp          = Join-Path $Root "temp"
+$VendorDir    = Join-Path $Root "vendor"
 $SitePackages = Join-Path $VendorDir "site-packages"
-$BrowserDir = Join-Path $VendorDir "ms-playwright"
-$PythonDir = Join-Path $Root $PythonDirName
-$PythonExe = Join-Path $PythonDir "python.exe"
-$PthFile   = Join-Path $PythonDir "python314._pth"
+$BrowserDir   = Join-Path $VendorDir "ms-playwright"
+$PythonDir    = Join-Path $Root $PythonDirName
+$PythonExe    = Join-Path $PythonDir "python.exe"
+$PthFile      = Join-Path $PythonDir "python314._pth"
+
+#make temp dir
+New-Item -Path $Tmp -ItemType Directory
 
 function Ensure-Dir([string]$Path) {
   if (-not (Test-Path -LiteralPath $Path)) {
@@ -121,10 +124,10 @@ Ensure-Dir $SitePackages
 Ensure-Dir $BrowserDir
 
 # 1) Download 4 files
-$PythonZipPath = Join-Path $Tmp $PythonZipName
-$PlaywrightWhlPath = Join-Path $Tmp $PlaywrightWhlName
-$PyeeWhlPath = Join-Path $Tmp $PyeeWhlName
-$GreenletWhlPath = Join-Path $Tmp $GreenletWhlName
+$PythonZipPath     = Join-Path $Tmp $PythonZipName
+$PlaywrightWhlPath = Join-Path $Tmp $PlaywrightWhl
+$PyeeWhlPath       = Join-Path $Tmp $PyeeWhl
+$GreenletWhlPath   = Join-Path $Tmp $GreenletWhl
 
 Download-File $PythonZipUrl $PythonZipPath
 Download-File $PlaywrightWhlUrl $PlaywrightWhlPath
@@ -180,6 +183,4 @@ Write-Host "Site-packages: $SitePackages"
 Write-Host "Playwright browsers: $BrowserDir"
 Write-Host "DONE"
 
-#rm -Path $Root\temp -Recurse -Force
-
-
+rm -Path $Root\temp -Recurse -Force
